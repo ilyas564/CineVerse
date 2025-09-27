@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CineVerse — расписание и билеты</title>
+
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Подключаем отдельный CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <meta name="description" content="CineVerse — сеть кинотеатров. Расписание, бронирование мест и удобная корзина." />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand" id="logo" role="button" tabindex="0" aria-label="Перейти на главную">
+        <div class="brand-mark">CV</div>
+        <div class="brand-text">
+          <div class="brand-name">CineVerse</div>
+          <div class="brand-sub">сеть кинотеатров</div>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Главная навигация">
+        <ul>
+          <li><a href="#" data-route="home" class="nav-link active">Главная</a></li>
+          <li><a href="#" data-route="about" class="nav-link">О нас</a></li>
+          <li><a href="#" data-route="contacts" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn search-toggle" id="searchToggle" aria-label="Поиск">🔍</button>
+
+        <div class="cart-wrap" id="cartToggle" aria-live="polite">
+          <button class="cart-btn" aria-label="Корзина (открыть)">
+            <img src="img/shopping-cart.png" height="22" width="22">
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-bar" id="searchBar" aria-hidden="true">
+      <input id="globalSearch" placeholder="Поиск фильма, актёра или жанра..." />
+      <button id="searchClear" class="btn small">Очистить</button>
+    </div>
+  </header>
+
+  <!-- CART SLIDEOUT -->
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <div class="cart-head">
+      <h3>Корзина</h3>
+      <button class="btn" id="closeCart">✕</button>
+    </div>
+    <div class="cart-body" id="cartItems">
+      <div class="empty">Корзина пуста</div>
+    </div>
+    <div class="cart-foot">
+      <div class="cart-sum">Итого: <strong id="cartTotal">0 руб</strong></div>
+      <div class="cart-actions">
+        <button class="btn secondary" id="clearCart">Очистить</button>
+        <button class="btn primary" id="checkoutBtn">Перейти к бронированию</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT (SPA tabs) -->
+  <main class="main" id="mainContent">
+    <!-- HOME -->
+    <section id="page-home" class="page active">
+      <div class="hero">
+        <div class="hero-left">
+          <h1 class="site-title">CineVerse <span class="shine">— сейчас в прокате</span></h1>
+          <p class="muted">Выбирай фильм, выбирай сеанс, бронируй места.</p>
+        </div>
+      </div>
+
+      <div class="movies-grid" id="moviesGrid" aria-live="polite">
+        <!-- Карточки фильмов генерируются JS -->
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="page-about" class="page">
+      <div class="section-inner">
+        <h2>О нас</h2>
+        <p class="lead">CineVerse — сеть кинотеатров, созданная для тех, кто любит кино во всех его проявлениях. Наши залы — от уютных Premium до масштабных VIP.</p>
+
+        <div class="halls">
+          <article class="hall">
+            <div class="hall-img" style="background-image:url('https://picsum.photos/seed/hall1/800/500')"></div>
+            <div class="hall-body">
+              <h3>VIP</h3>
+              <p class="muted">Огромный экран, премиум-звук Dolby Atmos, идеальный выбор для блокбастеров.</p>
+            </div>
+          </article>
+
+          <article class="hall">
+            <div class="hall-img" style="background-image:url('https://picsum.photos/seed/hall2/800/500')"></div>
+            <div class="hall-body">
+              <h3>Премиум</h3>
+              <p class="muted">Комфортные кресла-реклайнеры, отдельный бар и расширенное меню.</p>
+            </div>
+          </article>
+
+          <article class="hall">
+            <div class="hall-img" style="background-image:url('https://picsum.photos/seed/hall3/800/500')"></div>
+            <div class="hall-body">
+              <h3>Обычный</h3>
+              <p class="muted">Просторный зал со стерео звуком.</p>
+            </div>
+          </article>
+        </div>
+
+        <h3>Контакты сети</h3>
+        <p class="muted">Телефон: +79657917849 · e-mail: info.cineverse@gmail.com</p>
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="page-contacts" class="page">
+      <div class="section-inner">
+        <h2>Контакты и карта</h2>
+        <div class="contacts-grid">
+          <div class="contact-card">
+            <h4>Адрес</h4>
+            <p class="muted">г. Каспийск, ул. Махачкалинская 102</p>
+            <h4>Телефон</h4>
+            <p class="muted">+79657917849</p>
+            <h4>Email</h4>
+            <p class="muted">support@cineverse.example</p>
+          </div>
+
+          <div class="map-card">
+            <!-- Заглушка карты. Замени src на код Google Maps / Yandex / OpenStreetMap iframe -->
+            <iframe
+              title="Карта"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=21.0122%2C52.2297%2C21.0122%2C52.2297&layer=mapnik"
+              style="width:100%;height:320px;border:0" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <h3>Обратная связь</h3>
+        <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); alert('Форма отправлена (демо)');">
+          <div class="row">
+            <input placeholder="Имя" required />
+            <input placeholder="Email" required />
+          </div>
+          <textarea placeholder="Сообщение" required></textarea>
+          <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button class="btn primary">Отправить</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL: SEAT PICKER -->
+  <div class="modal" id="seatModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="btn modal-close" id="closeSeatModal" aria-label="Закрыть">✕</button>
+      <div class="modal-body">
+        <div class="modal-left">
+          <div id="modalMovieInfo"></div>
+          <div class="seat-screen">Экран</div>
+          <div class="seat-map" id="modalSeatMap" role="grid" aria-label="Схема мест"></div>
+        </div>
+        <div class="modal-right">
+          <div>
+            <h4>Выбранные места</h4>
+            <div id="modalSelected">—</div>
+            <div style="margin-top:12px">
+              <label>Тип билета
+                <select id="modalTicketType">
+                  <option value="standard">Обычный — 300 руб</option>
+                  <option value="premium">Премиум — 500 руб</option>
+                  <option value="vip">VIP — 1200 руб</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-actions" style="margin-top:15px">
+            <div class="price">Итого: <strong id="modalPrice">0 руб</strong></div>
+            <div style="display:flex;gap:10px">
+              <button class="btn secondary" id="modalCancel">Отмена</button>
+              <button class="btn primary" id="modalAddToCart">Добавить в корзину</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: MOVIE DETAILS -->
+  <div class="movie-details-modal" id="movieDetailsModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="movie-details-card">
+      <button class="btn movie-details-close" id="closeMovieDetailsModal" aria-label="Закрыть">✕</button>
+      <div class="movie-details-left">
+        <div class="movie-details-poster">
+          <img id="detailsPoster" src="" alt="">
+        </div>
+        <div class="movie-trailer" id="detailsTrailer">
+          <div>Трейлер будет здесь</div>
+        </div>
+      </div>
+      <div class="movie-details-right">
+        <h2 id="detailsTitle"></h2>
+        <div class="meta" id="detailsMeta"></div>
+        <div class="desc" id="detailsDesc"></div>
+        <div style="margin-top:20px">
+          <h4>Сеансы</h4>
+          <div id="detailsSessions"></div>
+        </div>
+        <div class="card-actions" style="margin-top:24px">
+          <button class="btn primary" id="detailsBookBtn">Забронировать билеты</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>CineVerse © <span id="year">2025</span></div>
+      <div class="socials">
+        <?xml version="1.0"?><svg class="bi bi-telegram" fill="currentColor" height="30" viewBox="0 0 16 16" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/></svg>
+        <?xml version="1.0"?><svg id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" height="30" viewBox="0 0 32 32" width="30" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
+          .st0{fill:url(#SVGID_1_);}
+          .st1{fill:#FFFFFF;}
+        </style><g><linearGradient gradientTransform="matrix(16.0027 -27.7174 27.7174 16.0027 -878.9595 -482.2268)" gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="-1.206969e-06" x2="1" y1="32" y2="32"><stop offset="0" style="stop-color:#FEC053"/><stop offset="0.327" style="stop-color:#F2203E"/><stop offset="0.648" style="stop-color:#B729A8"/><stop offset="1" style="stop-color:#5342D6"/></linearGradient><path class="st0" d="M16,0L16,0c8.8,0,16,7.2,16,16c0,8.8-7.2,16-16,16C7.2,32,0,24.8,0,16C0,7.2,7.2,0,16,0z"/><path class="st1" d="M20.7,6h-9.5C8.3,6,6,8.4,6,11.4v9.2c0,2.9,2.3,5.3,5.3,5.4h9.5c2.9,0,5.3-2.4,5.3-5.4v-9.2   C26,8.4,23.7,6,20.7,6z M24.2,20.5c0,2-1.6,3.7-3.7,3.7h-9.1c-2,0-3.7-1.7-3.6-3.7v-9c0-2,1.6-3.7,3.6-3.7h9.1c2,0,3.7,1.7,3.7,3.7   V20.5z"/><path class="st1" d="M16,10.9c-2.8-0.1-5.2,2.2-5.2,5c-0.1,2.8,2.2,5.2,5,5.2s5.2-2.2,5.2-5l0-0.1C21.1,13.2,18.8,10.9,16,10.9z    M16,19.3c-1.8,0-3.3-1.4-3.4-3.2c0-1.8,1.4-3.3,3.2-3.4s3.3,1.4,3.4,3.2l0,0.1C19.3,17.8,17.8,19.3,16,19.3z"/><path class="st1" d="M21.3,9.4c0.6,0,1.1,0.5,1.1,1.2s-0.5,1.2-1.1,1.2s-1.1-0.5-1.1-1.2S20.7,9.4,21.3,9.4z"/></g></svg>
+      </div>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
