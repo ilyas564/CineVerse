@@ -101,9 +101,11 @@
   
   /* halls / about */
   .section-inner{ padding:8px 4px }
+  .section-inner h2{text-align: center;}
   .halls{ display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:16px; margin-top:12px }
-  .hall{ display:flex; gap:12px; background:rgba(255,255,255,0.02); padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.02) }
-  .hall-img{ width:160px; height:100px; background-size:cover; background-position:center; border-radius:8px; flex-shrink:0 }
+  .hall{gap:12px; background:rgba(255,255,255,0.02); padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.02) }
+  .hall-img{ width:350px; height:180px; background-size:cover; background-position:center; border-radius:8px; flex-shrink:0 }
+  .hall{text-align: center;}
   
   /* contacts */
   .contacts-grid{ display:grid; grid-template-columns: 320px 1fr; gap:16px; align-items:start }
