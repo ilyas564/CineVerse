@@ -45,7 +45,7 @@
   .btn.secondary{ background: rgba(255,255,255,0.02) }
   .btn.small{ padding:6px 8px; font-size:13px; }
   
-  .cart-btn{ position:relative; display:inline-flex; align-items:center; gap:8px; padding:8px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03) }
+  .cart-btn{ position:relative; display:inline-flex; align-items:center; gap:8px; padding:8px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03); margin-right: 8px; }
   .cart-count{ position:absolute; top:-6px; right:-6px; background:var(--accent2); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
   
   /* search bar */
@@ -194,8 +194,7 @@
     }
     
     .header-actions {
-      width: 100%;
-      justify-content: center;
+      justify-content: right;
       gap: 12px;
     }
     
@@ -487,5 +486,125 @@
     .cart-body, .movie-details-card {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
+    }
+  }
+  /* Гамбургер меню */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 1.5px;
+    width: 90%;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Боковое меню для мобильных */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(8,10,20,0.98), rgba(6,8,18,0.96));
+    border-left: 1px solid var(--panel);
+    z-index: 100;
+    transition: right 0.3s ease;
+    padding: 80px 20px 20px;
+    overflow-y: auto;
+  }
+
+  .mobile-nav.open {
+    right: 0;
+  }
+
+  .mobile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-nav a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.28s;
+    font-weight: 600;
+  }
+
+  .mobile-nav a.active,
+  .mobile-nav a:hover {
+    color: var(--text);
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  }
+
+  .mobile-nav-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  /* Оверлей для мобильного меню */
+  .mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+  }
+
+  .mobile-nav-overlay.open {
+    display: block;
+  }
+
+  /* Адаптация для мобильных */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex !important;
+    }
+
+    .main-nav {
+      display: none;
+    }
+
+    .header-inner {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+    }
+
+    .brand {
+      flex: 1;
+    }
+
+    .header-actions {
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
     }
   }

@@ -101,7 +101,67 @@
           // --- Минимальные утилиты ---
           const $ = sel => document.querySelector(sel);
           const $$ = sel => Array.from(document.querySelectorAll(sel));
-      
+
+          // --- Mobile menu functionality ---
+          const hamburger = $('#hamburger');
+          const mobileNav = document.createElement('div');
+          const mobileNavOverlay = document.createElement('div');
+
+          // Создаем мобильное меню
+          mobileNav.className = 'mobile-nav';
+          mobileNav.innerHTML = `
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрыть меню">✕</button>
+            <nav aria-label="Мобильная навигация">
+              <ul>
+                <li><a href="#" data-route="home" class="nav-link active">Главная</a></li>
+                <li><a href="#" data-route="about" class="nav-link">О нас</a></li>
+                <li><a href="#" data-route="contacts" class="nav-link">Контакты</a></li>
+              </ul>
+            </nav>
+          `;
+
+          mobileNavOverlay.className = 'mobile-nav-overlay';
+
+          document.body.appendChild(mobileNav);
+          document.body.appendChild(mobileNavOverlay);
+
+          // Функции для открытия/закрытия меню
+          function openMobileMenu() {
+            mobileNav.classList.add('open');
+            mobileNavOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          }
+
+          function closeMobileMenu() {
+            mobileNav.classList.remove('open');
+            mobileNavOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+
+          // События для мобильного меню
+          hamburger.addEventListener('click', openMobileMenu);
+
+          // Обработка кликов по ссылкам в мобильном меню
+          mobileNav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              const route = e.target.dataset.route;
+              
+              // Обновляем активную страницу
+              $$('.page').forEach(p => p.classList.remove('active'));
+              $$('.nav-link').forEach(l => l.classList.remove('active'));
+              $(`#page-${route}`).classList.add('active');
+              e.target.classList.add('active');
+              
+              // Закрываем меню после выбора
+              closeMobileMenu();
+            });
+          });
+
+          // Закрытие меню
+          $('#mobileNavClose').addEventListener('click', closeMobileMenu);
+          mobileNavOverlay.addEventListener('click', closeMobileMenu);
+
           // --- Инициализация UI ---
           document.getElementById('year').textContent = new Date().getFullYear();
       
